@@ -1,0 +1,35 @@
+/*
+ * Copyright (c) 2018. Michael Jonker (http://openpoint.ie)
+ *
+ * This file is part of Onion-tests.
+ *
+ * Onion-tests is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at
+ * your option) any later version.
+ *
+ * Onion-tests is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with onion-tests. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+syntax = "proto3";
+
+package onion;
+option objc_class_prefix = "HLW";
+
+service Cycle {
+    rpc DoCycle (SendDate) returns (ReturnImage) {}
+}
+
+message SendDate {
+    string date = 1;
+}
+
+message ReturnImage {
+    bytes image = 1;
+}
