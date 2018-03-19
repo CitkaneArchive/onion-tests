@@ -45,21 +45,22 @@ function Data(){
             reqres:new metric(),
             grpc:new metric()
         };
-        this.write();
+        this.write('data');
     }
     if(fs.existsSync(path.join(RootDir,'server/errors.json'))){
         this.errors = require(path.join(RootDir,'server/errors.json'));
     }else{
         this.errors = {};
+        this.write('errors');
     }
 
     this.tor = {}
 }
-Data.prototype.write = function(){
+Data.prototype.write = function(type){
     const json = JSON.stringify(this.data,null,'\t');
     const err = JSON.stringify(this.errors,null,'\t');
-    fs.writeFileSync(path.join(RootDir,'server/data.json'),json);
-    fs.writeFileSync(path.join(RootDir,'server/errors.json'),err);
+    if(!type || type === 'data') fs.writeFileSync(path.join(RootDir,'server/data.json'),json);
+    if(!type || type === 'errors') fs.writeFileSync(path.join(RootDir,'server/errors.json'),err);
 };
 Data.prototype.add = function(key,time,size){
     this.data[key].moved += size;
