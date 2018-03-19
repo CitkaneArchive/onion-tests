@@ -17,6 +17,7 @@
 .env.production.local
 process.env
 /.idea
+*.iml
 
 
 npm-debug.log*

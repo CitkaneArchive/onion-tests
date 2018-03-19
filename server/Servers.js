@@ -50,10 +50,18 @@ Servers.prototype.makeGrpc = function(key){
 };
 
 Servers.prototype.makeSocket = function(key){
-    Wsockets[key] = new WebSocket.Server({
-        port:Services[key].WebSocketPort,
-        host:'localhost'
-    });
+    let loc;
+    if(key === 'public'){
+        loc = {
+            port:Services[key].WebSocketPort
+        }
+    }else{
+        loc = {
+            port:Services[key].WebSocketPort,
+                host:'localhost'
+        }
+    }
+    Wsockets[key] = new WebSocket.Server(loc);
     Wsockets[key].on('connection', socket => {
 
         if(key === 'socketServer'){

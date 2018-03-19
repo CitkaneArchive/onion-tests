@@ -27,12 +27,17 @@ console.log(environ);
 const WebSocket = require('isomorphic-ws');
 const numeral = require('numeral');
 
+console.log(window.location.host);
+
 let socketLocation;
 if(window.location.host.indexOf('localhost') === 0){
     socketLocation = "ws://localhost:"+environ.socketPort+'/';
-}else{
+}else if(window.location.host === environ.onion){
     socketLocation = "ws://"+environ.onion+':'+environ.socketPort+'/';
+}else{
+    socketLocation = "ws://"+window.location.host+':'+environ.socketPort+'/';
 }
+
 
 
 const message = function (id,data){
