@@ -47,13 +47,19 @@ function Data(){
         };
         this.write();
     }
+    if(fs.existsSync(path.join(RootDir,'server/errors.json'))){
+        this.errors = require(path.join(RootDir,'server/errors.json'));
+    }else{
+        this.errors = {};
+    }
 
-    this.errors = {};
     this.tor = {}
 }
 Data.prototype.write = function(){
     const json = JSON.stringify(this.data,null,'\t');
+    const err = JSON.stringify(this.errors,null,'\t');
     fs.writeFileSync(path.join(RootDir,'server/data.json'),json);
+    fs.writeFileSync(path.join(RootDir,'server/errors.json'),err);
 };
 Data.prototype.add = function(key,time,size){
     this.data[key].moved += size;
