@@ -120,6 +120,9 @@ NumEntryGuards 10`
     }
 };
 
+if(fs.existsSync(path.join(RootDir,'src/service.json'))){
+    fs.unlinkSync(path.join(RootDir,'src/service.json'));
+}
 fs.writeFileSync(path.join(RootDir,'process.env'),'http_proxy=http://127.0.0.1:'+Services.grpcClient.HTTPTunnelPort,{encoding:'utf8'});
 require('dotenv').config({path:path.join(RootDir,'process.env')});
 
