@@ -132,7 +132,7 @@ class App extends Component {
                     The test is designed to give equal opportunity to all scenarios under varying network conditions. More about definitions and methodologies are in the <a href="#footnotes">footnotes</a>.
                 </p>
                 <p>
-                    Code can be examined at <a href = 'http://github.com' target = '_blank' rel="noopener noreferrer">Github</a>.
+                    Code can be examined at <a href = 'https://github.com/citkane/onion-tests' target = '_blank' rel="noopener noreferrer">Github</a>.
                 </p>
                 <div id='options'>
                     <div className = {opt===1?'button active':'button'} onClick={()=>{

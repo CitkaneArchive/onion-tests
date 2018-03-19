@@ -9,9 +9,9 @@ The test is designed to give equal opportunity to all scenarios under varying ne
 
 ## Live test results:
 
-http://onion.openpoint.ie
+http://oniontests.openpoint.ie
 
-http://??????.onion
+http://flhqvb2425keopts.onion/
 
 ## Methodology
 
@@ -38,13 +38,17 @@ The connection quality for a circuit can be a lottery, so every two hours all th
 Clone this repo and cd into directory.
 ```aidl
 npm install
-npm run build
-node Main.js
 ```
-The .onion address for the website will be in `<directory>/tor/keys/public/hostname`.
-
-To start in development mode:
+First, run in dev mode to create some setup files:
 ```aidl
 NODE_ENV=development node Main.js
 ```
-and React will open a local instance of the site at `http://localhost:3000`
+React will open a local instance of the site at `http://localhost:3000`.
+
+The .onion address for the website will be in `<directory>/tor/keys/public/hostname`.
+
+Build the React website code and start in production mode:
+```aidl
+npm run build
+node Main.js
+```
