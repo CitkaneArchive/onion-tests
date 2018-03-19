@@ -28,4 +28,5 @@ yarn-error.log*
 /tor/data/*
 /tor/*_torrc
 /server/data.json
+/server/errors.json
 /src/service.json
