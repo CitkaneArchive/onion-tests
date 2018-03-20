@@ -5,6 +5,7 @@
   "dependencies": {
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "forever": "^0.15.3",
     "grpc": "^1.10.0",
     "http-proxy-to-socks": "^1.0.2",
     "isomorphic-ws": "^4.0.0",
@@ -18,9 +19,11 @@
     "ws": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start" : "forever start --killSignal=SIGTERM Main.js",
+    "stop" : "forever stop Main.js",
+    "development" : "NODE_ENV=development node Main.js"
   }
 }

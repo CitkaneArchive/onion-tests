@@ -32,8 +32,6 @@ const clients = require(path.join(RootDir,'server/Clients.js'));
 
 const image = fs.readFileSync(path.join(RootDir,'public/honeybadger.jpg'));
 
-console.log(image.length);
-
 function Servers(){}
 
 Servers.prototype.makeGrpc = function(key){

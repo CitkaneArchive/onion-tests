@@ -93,7 +93,7 @@ Data.prototype.torLog = function(key,mess){
         const string = Ts()+data;
         this.tor[key].unshift(string);
         if(this.tor[key].length > 100) this.tor[key].pop();
-        console.log(key,string);
+        //console.log(key,string);
     })
 };
 

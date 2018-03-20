@@ -41,7 +41,7 @@ npm install
 ```
 First, run in dev mode to create some setup files:
 ```aidl
-NODE_ENV=development node Main.js
+npm run development
 ```
 React will open a local instance of the site at `http://localhost:3000`.
 
@@ -50,5 +50,10 @@ The .onion address for the website will be in `<directory>/tor/keys/public/hostn
 Build the React website code and start in production mode:
 ```aidl
 npm run build
-node Main.js
+npm run start
+```
+
+This will start and release the console. To stop, run:
+```aidl
+npm run stop
 ```

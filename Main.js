@@ -21,18 +21,31 @@
 
 global.Production = process.env.NODE_ENV !== 'development';
 global.RootDir = __dirname;
-global.Rebooting = false;
 global.Wsockets = {};
 global.Ts = function(){
     return '['+new Date().toLocaleString()+'] ';
 };
-
 const path = require("path");
 const fs = require('fs');
 const onion = require(path.join(RootDir,"server/Onion.js"));
 const servers = require(path.join(RootDir,"server/Servers.js"));
 const Data = require(path.join(RootDir,"server/Data.js"));
 
+process.on('exit', () => {
+    onion.stopOnion();
+});
+process.on('uncaughtException', () => {
+    onion.stopOnion();
+});
+
+function handle(signal) {
+
+    onion.stopOnion();
+    process.exit();
+}
+
+process.on('SIGINT', handle);
+process.on('SIGTERM', handle);
 
 global.Services = {
     public:{
@@ -143,6 +156,9 @@ onion.startOnion().then(()=>{
 },err=>{
     console.error(err);
 });
+
+
+
 setInterval(()=>{
     Data.write();
 },1000*60);

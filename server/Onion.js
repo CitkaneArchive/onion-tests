@@ -59,10 +59,16 @@ Onion.prototype.makeService = function(key){
     if(!fs.existsSync(def.path)){
         fs.writeFileSync(def.path,def.torrc);
     }
-    Services[key].proc = child.spawn("tor",["-f",def.path/*,"--SocksPort",def.SocksPort*/],{
+    Services[key].proc = child.spawn("tor",["-f",def.path],{
         cwd:RootDir
     });
 
+    const Pids = Object.keys(Services).filter(k=>{
+        return Services[k].proc;
+    }).map(kk=>{
+       return  Services[kk].proc.pid;
+    });
+    fs.writeFileSync(path.join(RootDir,'tor/pids.json'),JSON.stringify(Pids));
     return new Promise((resolve, reject)=>{
         Services[key].proc.stdout.on('data',(data)=>{
 
@@ -75,9 +81,10 @@ Onion.prototype.makeService = function(key){
                 reject(data.toString());
             }
             if(data.toString().indexOf("Catching signal TERM, exiting cleanly")!== -1){
+                if(!Services[key].rebooting) return;
                 setTimeout(()=>{
                     this.rebootClients(key);
-                })
+                },1000)
             }
         });
     });
@@ -156,6 +163,8 @@ Onion.prototype.rebootClients = function(key){
     }else{
         Object.keys(Services).forEach(function(key){
             if(!Services[key].server) {
+
+                if(Services[key].rebooting) return;
                 Services[key].rebooting = true;
 
                 if(key==='httpClient'){
